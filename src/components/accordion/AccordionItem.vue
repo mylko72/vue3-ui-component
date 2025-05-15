@@ -14,8 +14,9 @@
       ref="content"
       class="ui-accordion-contents"
       :id="contentId"
-      role="region"
-      :aria-labelledby="headerId"
+      :role="visible ? 'region' : null"
+      :aria-labelledby="visible ? headerId : null"
+      :aria-hidden="!visible"
       :hidden="!visible"
       @transitionend="onTransitionEnd"
     >
