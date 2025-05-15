@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.txt-hidden {
+  position: relative;
+  z-index: -1;
+  display: inline-block;
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  word-break: initial;
+  word-wrap: initial;
+}
+
+.terms-def {
+  @apply mt-6 mb-8;
+
+  dt {
+    @apply text-base font-semibold;
+  }
+  dd {
+    @apply mb-2;
+  }
+}
+
+.comp-view {
+  @apply mt-6 mb-12;
+}
+
+.code-view {
+  @apply p-1 bg-slate-100 rounded-md
+}
+
+/*-------------------------------
+ * Tab
+---------------------------------*/
+.ui-tab-container {
+  @apply max-w-7xl border border-slate-200 rounded-xl;
+
+  .ui-tab-list {
+    @apply rounded-t-xl overflow-hidden;
+
+    .tab-list {
+      @apply flex-1;
+
+      .tab-btn {
+        @apply block w-full py-4 text-base bg-slate-200;
+      }
+
+      &.active {
+        .tab-btn {
+          @apply bg-white
+        }
+      }
+    }
+  }
+
+  .ui-tab-contents {
+
+    .tab-contents {
+      @apply w-full min-h-32 px-9 py-6 text-base text-slate-600;
+    }
+  }
+}
+
+/*-------------------------------
+ * Accordion
+---------------------------------*/
+.ui-accordion-group {
+  @apply max-w-3xl;
+
+  .accordion-btn {
+    @apply relative z-0 flex justify-between items-center w-full h-auto py-4 px-4 border border-b-slate-400 border-slate-300 text-base text-left;
+
+      &:focus, &:hover {
+        background: hsl(216deg 94% 94%);
+      }
+
+      .ic-arrow {
+        @apply text-xl;
+
+        transform-origin: center center;
+        transition: transform 0.3s ease;
+
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
+  }
+
+  .ui-accordion-contents {
+    @apply overflow-hidden text-base;
+    transition: height .3s;
+    will-change: height;
+
+    .inner-accordion-contents {
+      @apply p-3;
+    }
+  }
+}
+
+/*-------------------------------
+ * Popup(Modal)
+---------------------------------*/
+.modal-btn {
+  @apply px-3 py-2 rounded-lg text-base text-white;
+  background-color: #49a6e9;
+}
+.ui-layer-popup {
+  /* @apply bg-black bg-opacity-50; */
+
+  &.popup-open {
+    display: flex;
+  }
+
+  & ~ .popup-dimmed {
+    position: fixed;
+    z-index: 990;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    transition: opacity .2s;
+  }
+
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 991;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  .layer-popup-inner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    width: 400px;
+    max-height: 100%;
+    height: auto;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+  }
+
+  .layer-popup-title {
+    @apply w-full px-5 py-3;
+
+    h1 {
+      @apply text-xl font-bold;
+    }
+  }
+
+  .layer-popup-contents {
+    .inner {
+      @apply p-5;
+    }
+  }
+
+  .layer-popup-bottom {
+    display: flex;
+    width: 100%;
+
+    button {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      background-color: #666;
+      color: #fff;
+    }
+  }
+
+  .btn-layer-close {
+    @apply absolute top-3 right-4 text-xl;
+  }
+}
+
+/*-------------------------------
+ * Tooltip
+---------------------------------*/
+.ellipsis {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.tooltip {
+  position: absolute;
+  background: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 100;
+  display: none;
+}
+.tooltip-icon {
+  display: inline-block;
+  cursor: pointer;
+}
+/*-------------------------------
+ * Spin Button
+---------------------------------*/
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+.counter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+
+  input[readonly] {
+    width: 40px;
+    text-align: center;
+    @apply border border-slate-300;
+  }
+
+  .counter-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    border-radius: 4px;
+    outline: none;
+  }
+  .counter-input:focus {
+    box-shadow: 0 0 0 2px #007bff;
+  }
+}
