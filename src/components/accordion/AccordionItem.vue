@@ -72,6 +72,8 @@
           el.style.transition = 'height 0.3s ease';
           el.style.height = el.scrollHeight + 'px';
         });
+
+        this.setFocusable(true);
       },
       close() {
         const el = this.$refs.content;
@@ -83,6 +85,8 @@
         requestAnimationFrame(() => {
           el.style.height = '0px';
         });
+
+        this.setFocusable(false);
       },
       onTransitionEnd() {
         const el = this.$refs.content;
@@ -95,6 +99,31 @@
         }
 
         this.transitioning = false;
+      },
+      setFocusable(enabled) {
+        const content = this.$refs.content;
+        if (!content) return;
+
+        // 포커스 가능한 요소들만 선택
+        const focusables = content.querySelectorAll(
+          'a, button, input, textarea, select, [tabindex]'
+        );
+
+        focusables.forEach(el => {
+          if (enabled) {
+            if (el.__savedTabindex !== undefined) {
+              el.setAttribute('tabindex', el.__savedTabindex);
+            } else {
+              el.removeAttribute('tabindex');
+            }
+          } else {
+            const current = el.getAttribute('tabindex');
+            if (current !== null) {
+              el.__savedTabindex = current;
+            }
+            el.setAttribute('tabindex', '-1');
+          }
+        });
       },
     },
   }
