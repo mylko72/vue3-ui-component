@@ -11,17 +11,16 @@
         <AkChevronDown class="ic-arrow" :class="{ open: modelValue }" />
     </button>
     <div
+      v-if="visible"
       ref="content"
       class="ui-accordion-contents"
       :id="contentId"
-      :role="visible ? 'region' : null"
-      :aria-labelledby="visible ? headerId : null"
-      :aria-hidden="!visible"
-      :hidden="!visible"
+      role="region"
+      :aria-labelledby="headerId"
       @transitionend="onTransitionEnd"
     >
       <div class="inner-accordion-contents">
-          <slot />
+        <slot />
       </div>
     </div>
   </div>
@@ -50,7 +49,14 @@
     },
     watch: {
       modelValue(newVal) {
-        newVal ? this.open() : this.close();
+        if (newVal) {
+          this.visible = true;
+          this.$nextTick(() => {
+            this.open();
+          });
+        } else {
+          this.close();
+        }
       },
     },
     mounted() {
@@ -73,32 +79,33 @@
           el.style.height = el.scrollHeight + 'px';
         });
 
-        this.setFocusable(true);
+        // this.setFocusable(true);
       },
       close() {
         const el = this.$refs.content;
+        if (!el) return;
         this.transitioning = true;
 
         el.style.height = el.scrollHeight + 'px';
-        el.style.transition = 'height 0.3s ease';
 
         requestAnimationFrame(() => {
+          el.style.transition = 'height 0.3s ease';
           el.style.height = '0px';
         });
 
-        this.setFocusable(false);
+        // this.setFocusable(false);
       },
       onTransitionEnd() {
         const el = this.$refs.content;
 
         el.style.transition = '';
         el.style.height = '';
+        this.transitioning = false;
 
         if (!this.modelValue) {
-          this.visible = false;
+          this.visible = false; // 여기서 DOM 제거됨
         }
 
-        this.transitioning = false;
       },
       setFocusable(enabled) {
         const content = this.$refs.content;
