@@ -3,7 +3,7 @@
     <span ref="tooltipRef" v-bind="attrs" :class="tooltipClass" tabindex="0" :aria-describedby="tooltipId">
       <slot name="tooltipView" />
     </span>
-    <div :id="tooltipId" class="tooltip" role="tooltip" hidden>
+    <div :id="tooltipId" class="tooltip" role="tooltip" aria-hidden="true" hidden>
       <slot name="tooltipContent" />
     </div>
   </div>
@@ -43,6 +43,7 @@ const positionTooltip = (trigger, tooltip) => {
 
   // tooltip.style.display = 'block';
   tooltip.hidden = false;
+  tooltip.setAttribute("aria-hidden", "false");
 
   const tooltipRect = tooltip.getBoundingClientRect();
   tooltip.style.top = props.direction === 'top' ? (rect.top + scrollTop - tooltipRect.height - 3) + "px" : (rect.bottom + scrollTop + 3) + "px";
@@ -52,6 +53,7 @@ const positionTooltip = (trigger, tooltip) => {
 const hideTooltip = (tooltip) => {
   // tooltip.style.removeProperty('display')
   tooltip.hidden = true;
+  tooltip.setAttribute("aria-hidden", "true");
 }
 
 
