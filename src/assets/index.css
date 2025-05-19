@@ -236,7 +236,7 @@ body {
   font-size: 14px;
   white-space: nowrap;
   z-index: 100;
-  display: none;
+  /* display: none; */
 }
 .tooltip-icon {
   display: inline-block;

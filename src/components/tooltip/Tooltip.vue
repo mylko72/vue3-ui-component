@@ -3,7 +3,7 @@
     <span ref="tooltipRef" v-bind="attrs" :class="tooltipClass" tabindex="0" :aria-describedby="tooltipId">
       <slot name="tooltipView" />
     </span>
-    <div :id="tooltipId" class="tooltip" role="tooltip">
+    <div :id="tooltipId" class="tooltip" role="tooltip" hidden>
       <slot name="tooltipContent" />
     </div>
   </div>
@@ -41,7 +41,8 @@ const positionTooltip = (trigger, tooltip) => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
 
-  tooltip.style.display = 'block';
+  // tooltip.style.display = 'block';
+  tooltip.hidden = false;
 
   const tooltipRect = tooltip.getBoundingClientRect();
   tooltip.style.top = props.direction === 'top' ? (rect.top + scrollTop - tooltipRect.height - 3) + "px" : (rect.bottom + scrollTop + 3) + "px";
@@ -49,7 +50,8 @@ const positionTooltip = (trigger, tooltip) => {
 }
 
 const hideTooltip = (tooltip) => {
-  tooltip.style.removeProperty('display')
+  // tooltip.style.removeProperty('display')
+  tooltip.hidden = true;
 }
 
 
@@ -58,10 +60,17 @@ onMounted(() => {
   const tooltipId = trigger.getAttribute('aria-describedby');
   const tooltip = document.getElementById(tooltipId);
 
+  // 마우스 오버 / 키보드 포커스
   trigger.addEventListener('mouseenter', () => positionTooltip(trigger, tooltip));
   trigger.addEventListener('focus', () => positionTooltip(trigger, tooltip));
   trigger.addEventListener('mouseleave', () => hideTooltip(tooltip));
   trigger.addEventListener('blur', () => hideTooltip(tooltip));
+
+  // 모바일 대응: 클릭으로 토글
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    trigger.hidden ? positionTooltip(trigger, tooltip) : hideTooltip(tooltip);
+  });
 
   // 툴팁 ESC 키로 닫기 (접근성 강화)
   trigger.addEventListener('keydown', e => {
@@ -73,6 +82,13 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     if(trigger === document.activeElement){
       positionTooltip(trigger, tooltip)
+    }
+  });
+
+  // 바깥 클릭 시 닫기
+  document.addEventListener('click', (e) => {
+    if (!trigger.contains(e.target) && !tooltip.contains(e.target)) {
+      hideTooltip();
     }
   });
 })

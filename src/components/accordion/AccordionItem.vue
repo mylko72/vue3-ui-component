@@ -10,6 +10,7 @@
         <span>{{ title }}</span>
         <AkChevronDown class="ic-arrow" :class="{ open: modelValue }" />
     </button>
+    <!-- Android TalkBack 스크린리더 캐시 오류를 수정하기 위해 Dom에서 제거 -->
     <div
       v-if="visible"
       ref="content"

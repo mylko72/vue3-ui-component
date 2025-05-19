@@ -84,7 +84,7 @@
               <!-- First flight segment -->
               <div class="mt-3">
                 <div class="flex flex-col">
-                  <div class="flex">
+                  <div class="flex flex-wrap">
                     <strong class="mr-2">KE7273</strong>
                     <Tooltip tooltipClass="tooltip-container" tooltipId="tooltip-se">
                       <template #tooltipView>
@@ -128,7 +128,7 @@
               <!-- Second flight segment -->
               <div class="mt-3">
                 <div class="flex flex-col">
-                  <div class="flex">
+                  <div class="flex flex-wrap">
                     <strong class="mr-2">DL5129</strong>
                     <Tooltip tooltipClass="tooltip-container" tooltipId="tooltip-de2">
                       <template #tooltipView>
