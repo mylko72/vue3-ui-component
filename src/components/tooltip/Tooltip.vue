@@ -69,7 +69,7 @@ onMounted(() => {
   // 모바일 대응: 클릭으로 토글
   trigger.addEventListener('click', (e) => {
     e.preventDefault();
-    trigger.hidden ? positionTooltip(trigger, tooltip) : hideTooltip(tooltip);
+    tooltip.hidden ? positionTooltip(trigger, tooltip) : hideTooltip(tooltip);
   });
 
   // 툴팁 ESC 키로 닫기 (접근성 강화)
@@ -88,7 +88,7 @@ onMounted(() => {
   // 바깥 클릭 시 닫기
   document.addEventListener('click', (e) => {
     if (!trigger.contains(e.target) && !tooltip.contains(e.target)) {
-      hideTooltip();
+      hideTooltip(tooltip);
     }
   });
 })
