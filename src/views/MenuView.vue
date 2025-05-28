@@ -13,7 +13,7 @@
         전체 메뉴 컨테이너에 <span class="code-view">role="navigation"</span>과 aria-label를 사용하여 메뉴 네비게이션임을 안내한다. 상위 메뉴에 <span class="code-view">role="menubar"</span>와 <span class="code-view">role="menuitem"</span>을 삽입하고 그 하위 메뉴에는 <span class="code-view">role="menu"</span>와 <span class="code-view">role="menuitem"</span>을 사용한다.
       </p>
       <p class="py-2">
-        상위 메뉴가 하위 메뉴를 가지고 있는 경우 <span class="code-view">aria-haspopup="true"</span>속성을 삽입하여 하위 메뉴가 있음을 스크린리더에서 읽게 하고,  하위 메뉴가 펼쳐졌을 때는 <span class="code-view">aria-expanded="true"</span>를 삽입하고 aria-controls 속성으로 하위 메뉴의 id 연결한다. 또한 하위 메뉴가 없는 상위 메뉴는 aria-haspopup 속성 자체가 삭제 되고, 펼쳐질 하위 메뉴가 없으므로 aria-expanded 와 aria-controls 속성 또한 삭제한다.
+        상위 메뉴가 하위 메뉴를 가지고 있는 경우 <span class="code-view">aria-haspopup="true"</span>속성을 삽입하여 하위 메뉴가 있음을 스크린리더에서 읽게 하고,  하위 메뉴가 펼쳐졌을 때는 <span class="code-view">aria-expanded="true"</span>를 삽입하고 aria-controls 속성으로 하위 메뉴의 id 연결한다. 또한 하위 메뉴에 aria-labelledby를 상위 메뉴에 id와 연결하여 참조관계를 명확히 한다. 또한 하위 메뉴가 없는 상위 메뉴는 aria-haspopup 속성 자체가 삭제 되고, 펼쳐질 하위 메뉴가 없으므로 aria-expanded 와 aria-controls 속성 또한 삭제한다.
       </p>
     </div>
     <div class="my-6">
