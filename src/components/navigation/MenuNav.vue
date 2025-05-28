@@ -13,7 +13,7 @@
           ref="buttonRefs"
           role="menuitem"
           :aria-haspopup="menu.items?.length ? true : null"
-          :aria-expanded="menu.items?.length ?openIndex === index : null"
+          :aria-expanded="menu.items?.length ? openIndex === index : null"
           :id="`menu-${index}`"
           :aria-controls="menu.items?.length ? `submenu-${index}` : null"
           @keydown="handleMainKeydown($event, index)"
@@ -22,9 +22,8 @@
         </button>
         <!-- 서브 메뉴 -->
         <ul
-          ref="submenuRefs"
-          v-if="menu.items?.length"
-          v-show="openIndex === index"
+          ref="submenuRef"
+          v-if="menu.items?.length && openIndex === index"
           role="menu"
           :id="`submenu-${index}`"
           :class="`sub-${direction}`"
@@ -61,7 +60,7 @@ const props = defineProps({
 
 const openIndex = ref(null);
 const buttonRefs = ref([]);
-const submenuRefs = ref([]);
+const submenuRef = ref([])
 const isHorizontal = props.direction === 'horizontal'
 const forwardKey = isHorizontal ? 'ArrowRight' : 'ArrowDown'
 const backwardKey = isHorizontal ? 'ArrowLeft' : 'ArrowUp'
@@ -91,7 +90,7 @@ const handleMainKeydown = async (e, index) => {
       e.preventDefault();
       showMenu(index);
       await nextTick();
-      submenuRefs.value[index]?.querySelector('a')?.focus();
+      submenuRef.value[0]?.querySelector('a')?.focus();
       break;
     case 'ArrowRight':
       e.preventDefault();
@@ -107,7 +106,7 @@ const handleMainKeydown = async (e, index) => {
       e.preventDefault();
       showMenu(index);
       await nextTick();
-      submenuRefs.value[index]?.querySelector('a')?.focus();
+      submenuRef.value[0]?.querySelector('a')?.focus();
       break;
     case 'Escape':
       closeAllMenus();
@@ -118,8 +117,7 @@ const handleMainKeydown = async (e, index) => {
 
 const handleSubKeydown = (e, menuIndex, subIndex) => {
   const key = e.key
-  const items = submenuRefs.value[menuIndex]?.querySelectorAll('a')
-  const currentItem = items[subIndex]
+  const items = submenuRef.value[0]?.querySelectorAll('a')
 
   switch (key) {
     case forwardKey:
