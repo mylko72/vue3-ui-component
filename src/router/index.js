@@ -34,6 +34,11 @@ const router = createRouter({
       name: 'spin',
       component: () => import('../views/SpinView.vue'),
     },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: () => import('../views/MenuView.vue'),
+    },
   ],
 })
 

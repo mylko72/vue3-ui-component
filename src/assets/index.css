@@ -67,7 +67,74 @@ body {
 }
 
 .code-view {
-  @apply p-1 bg-slate-100 rounded-md
+  @apply p-1 bg-slate-100 rounded-md border border-slate-200
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.tbl-chklist {
+  @apply w-3/4 table-auto border-collapse border-spacing-2;
+
+  thead th {
+    @apply w-1/2 py-3 border-b border-b-slate-500 text-left;
+  }
+
+  td {
+    @apply py-3 border-b border-b-slate-200;
+  }
+}
+
+/*-------------------------------
+ * Main Navigation
+---------------------------------*/
+.main-menu {
+  @apply flex border border-x-0 border-t-slate-200 border-b-slate-200;
+  position: relative;
+
+  button[role='menuitem'] {
+    @apply px-8 py-4 text-lg font-bold;
+
+    &:focus {
+      border-bottom: 2px solid red;
+    }
+  }
+
+  ul[role='menu'] {
+    @apply px-4 py-3;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-top: 62px;
+    background-color: #fff;
+
+    > li {
+      display: inline-flex;
+    }
+  }
+
+  a[role='menuitem'] {
+    @apply px-6 py-2 text-base font-bold;
+  }
+
+  /* 메뉴 열림 */
+  button[aria-expanded="true"] {
+    border-bottom: 2px solid red;
+
+    & ~ ul[role='menu'] {
+      display: flex;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+
+      &.sub-vertical {
+        flex-direction: column;
+      }
+    }
+  }
 }
 
 /*-------------------------------
@@ -245,10 +312,6 @@ body {
 /*-------------------------------
  * Spin Button
 ---------------------------------*/
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
 .counter-wrapper {
   display: flex;
   align-items: center;

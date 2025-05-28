@@ -24,6 +24,7 @@
   import { HuSwitchOn } from '@kalimahapps/vue-icons';
   import { ClSlider01 } from '@kalimahapps/vue-icons';
   import { BxJoystickButton } from '@kalimahapps/vue-icons';
+  import { McMenuFill } from '@kalimahapps/vue-icons';
 
   const menus = ref([
     {
@@ -50,6 +51,11 @@
       item: 'Spin Button',
       url: '/spin',
       icon: BxJoystickButton
+    },
+    {
+      item: 'Menu',
+      url: '/menu',
+      icon: McMenuFill
     },
     {
       item: 'Table',

@@ -32,6 +32,9 @@
       accordionOptions: {
         type: Object,
       },
+      codeHeightlight: {
+        type: [Boolean, String]
+      }
     },
     emits: ['updateOpen'],
     data() {
