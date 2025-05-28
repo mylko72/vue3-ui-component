@@ -18,10 +18,12 @@
     </div>
     <div class="my-6">
       <h3 class="text-2xl">✅  접근성 체크리스트</h3>
-      <table class="tbl-chklist">
+      <table class="tbl-chklist w-full xl:w-3/4">
         <thead>
-          <th>항목</th>
-          <th>설명</th>
+          <tr>
+            <th>항목</th>
+            <th>설명</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -49,10 +51,12 @@
     </div>
     <div class="my-6">
       <h3 class="text-2xl">✅  키보드 내비게이션 흐름</h3>
-      <table class="tbl-chklist">
+      <table class="tbl-chklist w-full xl:w-3/4">
         <thead>
-          <th>키</th>
-          <th>동작 요약</th>
+          <tr>
+            <th>키</th>
+            <th>동작 요약</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -76,7 +80,7 @@
     </div>
     <div class="my-6">
       <h3 class="text-2xl">✅  설명요약</h3>
-      <table class="tbl-chklist">
+      <table class="tbl-chklist w-full xl:w-3/4">
         <thead>
           <tr>
             <th>기능</th>

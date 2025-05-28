@@ -9,6 +9,7 @@
         @mouseleave="hideMenu($event)"
       >
         <button
+          class="md:px-4 lg:px-8 px-6 py-4"
           ref="buttonRefs"
           role="menuitem"
           :aria-haspopup="menu.items?.length ? true : null"

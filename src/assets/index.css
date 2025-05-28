@@ -76,7 +76,7 @@ body {
 }
 
 .tbl-chklist {
-  @apply w-3/4 table-auto border-collapse border-spacing-2;
+  @apply table-auto border-collapse border-spacing-2;
 
   thead th {
     @apply w-1/2 py-3 border-b border-b-slate-500 text-left;
@@ -95,7 +95,7 @@ body {
   position: relative;
 
   button[role='menuitem'] {
-    @apply px-8 py-4 text-lg font-bold;
+    @apply text-lg font-bold;
 
     &:focus {
       border-bottom: 2px solid red;
@@ -134,6 +134,21 @@ body {
         flex-direction: column;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav[role='navigation'] {
+    padding-bottom: 66px;
+    overflow-x: auto;
+  }
+
+  .main-menu {
+    min-width: fit-content;
+  }
+
+  button[role='menuitem'] {
+    min-width: max-content;
   }
 }
 
