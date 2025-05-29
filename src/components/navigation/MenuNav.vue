@@ -13,7 +13,7 @@
           ref="buttonRefs"
           role="menuitem"
           :aria-haspopup="menu.items?.length ? true : null"
-          :aria-expanded="menu.items?.length ? openIndex === index : null"
+          :aria-expanded="menu.items?.length ? isExpanded(index) : null"
           :id="`menu-${index}`"
           :aria-controls="menu.items?.length ? `submenu-${index}` : null"
           @keydown="handleMainKeydown($event, index)"
@@ -23,7 +23,7 @@
         <!-- 서브 메뉴 -->
         <ul
           ref="submenuRef"
-          v-if="menu.items?.length && openIndex === index"
+          v-if="menu.items?.length && isExpanded(index)"
           role="menu"
           :id="`submenu-${index}`"
           :class="`sub-${direction}`"
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 
 
 const props = defineProps({
@@ -65,8 +65,6 @@ const isHorizontal = props.direction === 'horizontal'
 const forwardKey = isHorizontal ? 'ArrowRight' : 'ArrowDown'
 const backwardKey = isHorizontal ? 'ArrowLeft' : 'ArrowUp'
 
-console.log('forwardKey', forwardKey);
-
 const showMenu = (index) => {
   openIndex.value = index;
 }
@@ -74,6 +72,12 @@ const showMenu = (index) => {
 const closeAllMenus = () => {
   openIndex.value = null;
 }
+
+const isExpanded = computed(() => {
+  return (index) => {
+    return openIndex.value === index;
+  }
+})
 
 const hideMenu = (e) => {
   if(!e.currentTarget.contains(e.relatedTarget)){
